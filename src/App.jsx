@@ -1,21 +1,25 @@
 import Dashboard from "./components/Dashboard"
 import { useState, useEffect } from "react";
-
+import Login_page from "./components/Login_page";
+import Signup_page from "./components/Signup_page";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 function App() {
-    const [data, setdata] = useState([])
+  
 
 
-    useEffect(() => {
-        
-        fetch("http://localhost:8000/task")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                setdata(data)
-            })
-    }, [])
+    
 
-    return (<Dashboard Apidata={data.data} />)
+    return ( 
+    <>
+    <Router>
+    <Routes>    
+        <Route path="/" element={<Login_page />} />
+        <Route path="/signup" element={<Signup_page />} />
+        <Route path="/dashboard" element={<Dashboard  />} />
+    </Routes>
+    </Router>
+
+    </>)
 }
 
 export default App

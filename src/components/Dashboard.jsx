@@ -1,8 +1,11 @@
 import Taskcard from "./Taskcard";
 import "./cssfile.css"
 import { useState } from "react";
+import { useEffect } from "react";
 //hi this is comment
+
 const Dashboard = ({ Apidata = [] }) => {
+      const [data, setdata] = useState([])
     const addtask = (e) => {
         e.preventDefault();
         fetch("http://localhost:8000/task", {
@@ -26,6 +29,15 @@ const Dashboard = ({ Apidata = [] }) => {
     }
     console.log(Apidata)
 
+useEffect(() => {
+        
+        fetch("http://localhost:8000/task")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                setdata(data.data)
+            })
+    }, [])
 
 const [title, settitle] = useState(null)
 const [desc, setdesc] = useState(null)
