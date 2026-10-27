@@ -2,9 +2,16 @@ import Taskcard from "./Taskcard";
 import "./cssfile.css"
 import { useState } from "react";
 import { useEffect } from "react";
-//hi this is comment
+import { useAuth } from "./Auth_context";
 
-const Dashboard = ({ Apidata = [] }) => {
+const Dashboard = () => {
+const { IsAuthenticated, setIsAuthenticated } = useAuth();
+{
+   
+}
+
+
+
       const [data, setdata] = useState([])
     const addtask = (e) => {
         e.preventDefault();
@@ -27,7 +34,6 @@ const Dashboard = ({ Apidata = [] }) => {
                 alert("Task added successfully")
             })
     }
-    console.log(Apidata)
 
 useEffect(() => {
         
@@ -44,6 +50,12 @@ const [desc, setdesc] = useState(null)
 const [dealine, setdeadline] = useState(null)
 const [status, setstatus] = useState(null)
     return (<>
+    <button onClick={() => {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+    }
+    }
+    >Logout</button>
         <form className="task-form">
             <h3 className="task-form-title">Add New Task</h3>
 
@@ -116,11 +128,12 @@ const [status, setstatus] = useState(null)
             <button type="submit" className="form-submit-btn" onClick={addtask}>Add Task</button>
         </form>
 
-        {Apidata.map((a, i) => (
+        {data.map((a, i) => (
             <Taskcard key={i} title={a.task_title} desc={a.task_description}
                 status={a.status} deadline={a.deadline} id={a.id} user_id={a.user_id} />
         ))}
     </>)
+
 };
 
 
