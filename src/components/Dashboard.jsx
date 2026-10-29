@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "../config";
 import Taskcard from "./Taskcard";
 import "./cssfile.css"
 import { useState } from "react";
@@ -15,7 +16,7 @@ const { IsAuthenticated, setIsAuthenticated } = useAuth();
       const [data, setdata] = useState([])
     const addtask = (e) => {
         e.preventDefault();
-        fetch("http://localhost:8000/task", {
+        fetch(`${BACKEND_URL}/task`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,7 +38,7 @@ const { IsAuthenticated, setIsAuthenticated } = useAuth();
 
 useEffect(() => {
         
-        fetch("http://localhost:8000/task")
+        fetch(`${BACKEND_URL}/task`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)

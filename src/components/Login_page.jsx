@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "../config";
 import { useState, useRef, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const Login_page = () => {
   const navigate = useNavigate()
   const login_usr = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8000/login', {
+    fetch(`${BACKEND_URL}/login`, {
       method: 'POST',
       body: JSON.stringify({ email: username, password: password }),
       headers: {

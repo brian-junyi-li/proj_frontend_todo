@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "../config";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +11,7 @@ const Signup_page = () => {
 
   const signup_usr = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8000/signup', {
+    fetch(`${BACKEND_URL}/signup`, {
       method: 'POST',
       body: JSON.stringify({ email: email, password: password, name: name }),
       headers: {

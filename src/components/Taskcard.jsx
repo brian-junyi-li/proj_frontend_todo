@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "../config";
 import "./cssfile.css"
 import { useState, useRef, useEffect } from "react";
 
@@ -29,7 +30,7 @@ const Taskcard = ({ title, desc, status, deadline, id, user_id }) => {
   }, []);
 
   const del_taskcard = () => {
-    fetch('http://localhost:8000/task', {
+    fetch(`${BACKEND_URL}/task`, {
       method: 'DELETE',
       body: JSON.stringify({ id: id }),
       headers: {
@@ -45,7 +46,7 @@ const Taskcard = ({ title, desc, status, deadline, id, user_id }) => {
   const [edit_status, setedit_status] = useState(false);
   const UpdateStatus = (e) => {
     console.log("updatestatus executed")
-    fetch('http://localhost:8000/task', {
+    fetch(`${BACKEND_URL}/task`, {
       method: 'PATCH',
       body: JSON.stringify({ id: id, status: e.target.value, title: title, description: desc, user_id: user_id }),
       headers: { 'Content-Type': 'application/json' }
@@ -58,7 +59,7 @@ const Taskcard = ({ title, desc, status, deadline, id, user_id }) => {
   const [newdesc, setnewdesc] = useState(desc);
   const [newdeadline, setnewdeadline] = useState(deadline);
   function handleClick() {
-    fetch('http://localhost:8000/task', {
+    fetch(`${BACKEND_URL}/task`, {
       method: 'PATCH',
       body: JSON.stringify({ id: id, status: status, title: newtitle, description: newdesc, user_id: user_id, deadline: newdeadline }),
       headers: { 'Content-Type': 'application/json' }
